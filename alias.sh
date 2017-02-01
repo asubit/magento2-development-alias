@@ -1,4 +1,17 @@
-NC='\033[0m' # No Color
+# ==================================
+# Magento 2 Developement Alias Tools
+# ==================================
+
+# Configuration vars
+# ------------------
+PROJECT_PATH='/var/www/project'
+PROJECT_NAME='Project' # project folder name in pub/static/frontend 
+LOG_FILE='/var/log/apache2/error.log'
+MAGE_USER='www-data'
+MAGE_GROUP='www-data'
+
+# Unix colors
+# -----------
 BLACK='\033[0;30m'
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -14,12 +27,92 @@ LIGHTBLUE='\033[1;34m'
 LIGHTPURPLE='\033[1;35m'
 LIGHTCYAN='\033[1;36m'
 WHITE='\033[1;37m'
+NC='\033[0m' # No Color
 
-# Magento 2 alias tools
+# Alias definitions
+# -----------------
+# Display Magento commands list
 alias @m='magento'
+# Edit this file
 alias @edit='nano ~/.bashrc'
 alias @e='@edit'
-
+# Watch log
+alias @w='echo -e "${YELLOW}tail -f $LOG_FILE${NC}"
+tail -f $LOG_FILE'
+# Read log
+alias @r='echo -e "${YELLOW}nano $LOG_FILE${NC}"
+nano $LOG_FILE'
+#  Clean cahe
+alias @cc='echo -e "${YELLOW}magento cache:clean${NC}"
+magento ca:cl'
+# Flush cache
+alias @cf='echo -e "${YELLOW}magento cache:flush${NC}"
+magento ca:fl'
+# Remove cache folder
+alias @rc='echo -e "${YELLOW}rm -rf var/page_cache/* var/cache/* var/generation/* var/di/*${NC}"
+rm -rf $PROJECT_PATH/var/page_cache/* $PROJECT_PATH/var/cache/* $PROJECT_PATH/var/generation/* $PROJECT_PATH/var/di/*'
+# Remove generated styles folder
+alias @rs='echo -e "${YELLOW}rm -rf var/view_preprocessed/*${NC}"
+rm -rf $PROJECT_PATH/var/view_preprocessed/*
+echo -e "${YELLOW}rm -rf pub/static/frontend/$PROJECT_NAME/default/en_US/css/*${NC}"
+rm -rf $PROJECT_PATH/pub/static/frontend/$PROJECT_NAME/default/en_US/css/*
+echo -e "${YELLOW}rm -rf pub/static/frontend/$PROJECT_NAME/default/fr_FR/css/*${NC}"
+rm -rf $PROJECT_PATH/pub/static/frontend/$PROJECT_NAME/default/fr_FR/css/*
+echo -e "${YELLOW}rm -rf pub/static/frontend/$PROJECT_NAME/default/en_US/js/*${NC}"
+rm -rf $PROJECT_PATH/pub/static/frontend/$PROJECT_NAME/default/en_US/js/*
+echo -e "${YELLOW}rm -rf pub/static/frontend/$PROJECT_NAME/default/fr_FR/js/*${NC}"
+rm -rf $PROJECT_PATH/pub/static/frontend/$PROJECT_NAME/default/fr_FR/js/*
+echo -e "${YELLOW}rm -rf var/di/* var/generation/*${NC}"
+rm -rf $PROJECT_PATH/var/di/* $PROJECT_PATH/var/generation/*'
+# Remove generated styles folder and deploy static content
+alias @rsd='echo -e "${YELLOW}Remove style files (@rs)${NC}"
+@rs
+echo -e "${YELLOW}magento setup:static-content:deploy en_GB${NC}"
+magento setup:static-content:deploy en_GB
+echo -e "${YELLOW}magento setup:static-content:deploy en_US${NC}"
+magento setup:static-content:deploy en_US
+echo -e "${YELLOW}magento setup:static-content:deploy fr_FR${NC}"
+magento setup:static-content:deploy fr_FR
+echo -e "${YELLOW}magento cache:flush${NC}"
+@cf'
+# Apply open permission on var folder
+alias @c7='echo -e "${YELLOWchmod -R 777 $PROJECT_PATH/var/*${NC}"
+chmod -R 777 $PROJECT_PATH/var/*
+echo -e "${YELLOW}chown -R $MAGE_USER:$MAGE_GROUP $PROJECT_PATH/*${NC}"
+chown -R $MAGE_USER:$MAGE_GROUP $PROJECT_PATH/*'
+# Recompile Magento
+alias @sdc='echo -e "${YELLOW}magento setup:di:compile${NC}"
+magento setup:di:compile
+@cf
+@c7'
+# Upgrade all Magento modules
+alias @su='echo -e "${YELLOW}magento setup:upgrade${NC}"
+magento setup:upgrade'
+# Deploy static contents
+alias @sscd='echo -e "${YELLOW}magento setup:static-content:deploy"
+magento setup:static-content:deploy'
+# List all installed langages
+alias @ill='echo -e"${YELLOW}magento info:language:list${NC}"
+magento info:language:list'
+# Alias Git
+alias @gl='echo -e "${YELLOW}git log${NC}"
+git log'
+alias @glp='echo -e "${YELLOW}git lg${NC}"
+git lg'
+alias @gb='echo -e "${YELLOW}git branch --all${NC}"
+git branch --all'
+alias @gf='echo -e "${YELLOW}git fetch${NC}"
+git fetch'
+alias @gfd='echo -e "${YELLOW}git fetch -p${NC}"
+git fetch -p'
+alias @gs='echo -e "${YELLOW}git status${NC}"
+git status'
+alias @ga='echo -e "${YELLOW}git add .${NC}"
+git add .'
+alias @gc='echo -e "${YELLOW}git checkout .${NC}"
+git checkout .'
+alias @gd='echo -e "${YELLOW}git diff${NC}"
+git diff'
 # Display help text
 alias @help='
 echo -e "${LIGHTRED}Magento 2${NC} ${GREEN}Developement Alias Tools${NC}
@@ -35,6 +128,7 @@ ${YELLOW}cache${NC}
  ${GREEN}@cf${NC}    Flush the Magento cache
  ${GREEN}@rc${NC}    Remove the cache
  ${GREEN}@rs${NC}    Remove the Magento generated style files
+ ${GREEN}@rsd${NC}   Remove the Magento generated style files and deploy static content
 ${YELLOW}debug${NC}
  ${GREEN}@w${NC}     Watch the log file Apache Magento errors
  ${GREEN}@r${NC}     Open the log file Apache Magento errors
@@ -56,99 +150,12 @@ ${YELLOW}permission${NC}
 ${YELLOW}setup${NC}
  ${GREEN}@sdc${NC}   Compile the setup Magento di files
  ${GREEN}@su${NC}    Upgrade the setup Magento database
- ${GREEN}@up${NC}    Update project
+ ${GREEN}@sscd${NC}  Deploy static content
 ${NC}"'
 alias @h='@help'
 
-alias @up='sh /var/www/webshop/scripts/update.sh'
-
-# LOG WATCH
-alias @w='echo -e "${YELLOW}tail -f /var/log/apache2/error.log${NC}"
-tail -f /var/log/apache2/error.log'
-
-# LOG READ WATCH
-alias @r='echo -e "${YELLOW}nano /var/log/apache2/error.log${NC}"
-nano /var/log/apache2/error.log'
-
-#  CACHE CLEAN
-alias @cc='echo -e "${YELLOW}magento cache:clean${NC}"
-magento ca:cl'
-
-#  FLUSH CACHE
-alias @cf='echo -e "${YELLOW}magento cache:flush${NC}"
-magento ca:fl'
-
-#  RM CACHE
-alias @rc='echo -e "${YELLOW}rm -rf var/page_cache/* var/cache/* var/generation/* var/di/*${NC}"
-rm -rf var/page_cache/* var/cache/* var/generation/* var/di/*'
-
-#  RM STYLE
-alias @rs='echo -e "${YELLOW}rm -rf var/view_preprocessed/*${NC}"
-rm -rf var/view_preprocessed/*
-echo -e "${YELLOW}rm -rf pub/static/frontend/Roche/default/en_US/css/*${NC}"
-rm -rf pub/static/frontend/Roche/default/en_US/css/*
-echo -e "${YELLOW}rm -rf pub/static/frontend/Roche/default/fr_FR/css/*${NC}"
-rm -rf pub/static/frontend/Roche/default/fr_FR/css/*
-echo -e "${YELLOW}rm -rf pub/static/frontend/Roche/default/en_US/js/*${NC}"
-rm -rf pub/static/frontend/Roche/default/en_US/js/*
-echo -e "${YELLOW}rm -rf pub/static/frontend/Roche/default/fr_FR/js/*${NC}"
-rm -rf pub/static/frontend/Roche/default/fr_FR/js/*
-echo -e "${YELLOW}rm -rf var/di/* var/generation/*${NC}"
-rm -rf var/di/* var/generation/*'
-
-alias @rsd='echo -e "${YELLOW}Remove style files (@rs)${NC}"
-@rs
-echo -e "${YELLOW}magento setup:static-content:deploy en_GB${NC}"
-magento setup:static-content:deploy en_GB
-echo -e "${YELLOW}magento setup:static-content:deploy en_US${NC}"
-magento setup:static-content:deploy en_US
-echo -e "${YELLOW}magento setup:static-content:deploy fr_FR${NC}"
-magento setup:static-content:deploy fr_FR
-echo -e "${YELLOW}magento cache:flush${NC}"
-@cf'
-
-alias=@rs-FR='echo-e"magento setup:static-content:deploy fr_FR --exclude-theme=Magento/blank --exclude-theme=Magento/luma --exclude-theme=Magento/backend"
-magento setup:static-content:deploy fr_FR --exclude-theme="Magento/blank" --exclude-theme="Magento/luma" --exclude-theme="Magento/backend"'
-
-# CACHE PERMISSION 777
-alias @c7='echo -e "${YELLOW}chmod -R 777 var/*${NC}"
-chmod -R 777 var/*'
-
-# DI COMPILE
-alias @sdc='echo -e "${YELLOW}magento setup:di:compile${NC}"
-magento setup:di:compile
-@cf
-@c7'
-
-# UPGRADE DATABASE
-alias @su='echo -e "${YELLOW}magento setup:upgrade${NC}"
-magento setup:upgrade'
-
-# LIST LANGAGE INFO
-alias @ill='echo -e"${YELLOW}magento info:language:list${NC}"
-magento info:language:list'
-
-# GIT ALIAS
-alias @gl='echo -e "${YELLOW}git log${NC}"
-git log'
-alias @glp='echo -e "${YELLOW}git lg${NC}"
-git lg'
-alias @gb='echo -e "${YELLOW}git branch --all${NC}"
-git branch --all'
-alias @gf='echo -e "${YELLOW}git fetch${NC}"
-git fetch'
-alias @gfd='echo -e "${YELLOW}git fetch -p${NC}"
-git fetch -p'
-alias @gs='echo -e "${YELLOW}git status${NC}"
-git status'
-alias @ga='echo -e "${YELLOW}git add .${NC}"
-git add .'
-alias @gc='echo -e "${YELLOW}git checkout .${NC}"
-git checkout .'
-alias @gd='echo -e "${YELLOW}git diff${NC}"
-git diff'
-
-# JUST FOR FUN
+# Just for fun
+# ------------
 alias @fun='
 i=0
 while true
@@ -182,7 +189,8 @@ ${NC}"
 '
 
 # Run on session start
-cd /var/www/magento
+# --------------------
+cd $PROJECT_PATH
 clear
 @ascii2
 echo -e "
@@ -194,4 +202,3 @@ pwd
 echo -e "${LIGHTCYAN}The current Git branch is : ${NC}"
 git branch
 echo "Happy Coding !"
- 
