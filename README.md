@@ -17,7 +17,9 @@ Open `alias.sh` and edit the following configuration variables.
  - `MAGE_GROUP` : Replace with the Magento server group
 
 ## Usage
- @[alias]
+```
+@[alias]
+ ```
 
 ## Available commands
  - **@help** : Display this help text with all availables alias
@@ -28,6 +30,7 @@ Open `alias.sh` and edit the following configuration variables.
  - **@cf** : Flush the Magento cache
  - **@rc** : Remove the cache
  - **@rs** : Remove the Magento generated style files
+ - **@rsd* : Remove the Magento generated style files and deploy static content
  
 ### Debug
  - **@w** : Watch the log file Apache Magento errors
@@ -54,4 +57,5 @@ Open `alias.sh` and edit the following configuration variables.
 ### Setup
  - **@sdc** : Compile the setup Magento di files
  - **@su** : Upgrade the setup Magento database
+ - **@sscd** :  Deploy static content
  - **@up** : Update project
