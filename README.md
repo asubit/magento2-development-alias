@@ -1,9 +1,20 @@
-# Magento2 development alias
-
-
 # Magento 2 Developement Alias Tools
 
-My own custom development alias shell script
+## Installation
+
+Download the `alias.sh` file and replace your `.bashrc` with it.
+
+```
+cp alias.sh ~/.bashrc
+```
+
+## Configuration
+Open `alias.sh` and edit the following configuration variables.
+ - `PROJECT_PATH` : Replace with the asolute path on your Magento instance project location
+ - `PROJECT_NAME` : Replace with the generated folder name in `pub/static/frontend` (your own project namespace)
+ - `LOG_FILE` : Replace with absolute path to your log favorite file
+ - `MAGE_USER` : Replace with the Magento server user
+ - `MAGE_GROUP` : Replace with the Magento server group
 
 ## Usage
  @[alias]
