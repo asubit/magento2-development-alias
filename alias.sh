@@ -42,12 +42,19 @@ tail -f $LOG_FILE'
 # Read log
 alias @r='echo -e "${YELLOW}nano $LOG_FILE${NC}"
 nano $LOG_FILE'
+# Apply open permission on var folder
+alias @c7='echo -e "${YELLOWchmod -R 777 $PROJECT_PATH/var/*${NC}"
+chmod -R 777 $PROJECT_PATH/var/*
+echo -e "${YELLOW}chown -R $MAGE_USER:$MAGE_GROUP $PROJECT_PATH/*${NC}"
+chown -R $MAGE_USER:$MAGE_GROUP $PROJECT_PATH/*'
 #  Clean cahe
 alias @cc='echo -e "${YELLOW}magento cache:clean${NC}"
-magento ca:cl'
+magento ca:cl
+@c7'
 # Flush cache
 alias @cf='echo -e "${YELLOW}magento cache:flush${NC}"
-magento ca:fl'
+magento ca:fl
+@c7'
 # Remove cache folder
 alias @rc='echo -e "${YELLOW}rm -rf var/page_cache/* var/cache/* var/generation/* var/di/*${NC}"
 rm -rf $PROJECT_PATH/var/page_cache/* $PROJECT_PATH/var/cache/* $PROJECT_PATH/var/generation/* $PROJECT_PATH/var/di/*'
@@ -75,11 +82,6 @@ echo -e "${YELLOW}magento setup:static-content:deploy fr_FR${NC}"
 magento setup:static-content:deploy fr_FR
 echo -e "${YELLOW}magento cache:flush${NC}"
 @cf'
-# Apply open permission on var folder
-alias @c7='echo -e "${YELLOWchmod -R 777 $PROJECT_PATH/var/*${NC}"
-chmod -R 777 $PROJECT_PATH/var/*
-echo -e "${YELLOW}chown -R $MAGE_USER:$MAGE_GROUP $PROJECT_PATH/*${NC}"
-chown -R $MAGE_USER:$MAGE_GROUP $PROJECT_PATH/*'
 # Recompile Magento
 alias @sdc='echo -e "${YELLOW}magento setup:di:compile${NC}"
 magento setup:di:compile
