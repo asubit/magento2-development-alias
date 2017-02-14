@@ -30,7 +30,7 @@ Open `alias.sh` and edit the following configuration variables.
  - **@cf** : Flush the Magento cache
  - **@rc** : Remove the cache
  - **@rs** : Remove the Magento generated style files
- - **@rsd* : Remove the Magento generated style files and deploy static content
+ - **@rsd** : Remove the Magento generated style files and deploy static content
  
 ### Debug
  - **@w** : Watch the log file Apache Magento errors
