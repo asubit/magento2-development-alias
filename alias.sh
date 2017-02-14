@@ -43,7 +43,7 @@ tail -f $LOG_FILE'
 alias @r='echo -e "${YELLOW}nano $LOG_FILE${NC}"
 nano $LOG_FILE'
 # Apply open permission on var folder
-alias @c7='echo -e "${YELLOWchmod -R 777 $PROJECT_PATH/var/*${NC}"
+alias @c7='echo -e "${YELLOW}chmod -R 777 $PROJECT_PATH/var/*${NC}"
 chmod -R 777 $PROJECT_PATH/var/*
 echo -e "${YELLOW}chown -R $MAGE_USER:$MAGE_GROUP $PROJECT_PATH/*${NC}"
 chown -R $MAGE_USER:$MAGE_GROUP $PROJECT_PATH/*'
@@ -91,7 +91,7 @@ magento setup:di:compile
 alias @su='echo -e "${YELLOW}magento setup:upgrade${NC}"
 magento setup:upgrade'
 # Deploy static contents
-alias @sscd='echo -e "${YELLOW}magento setup:static-content:deploy"
+alias @sscd='echo -e "${YELLOW}magento setup:static-content:deploy${NC}"
 magento setup:static-content:deploy'
 # List all installed langages
 alias @ill='echo -e"${YELLOW}magento info:language:list${NC}"
