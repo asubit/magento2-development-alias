@@ -38,7 +38,7 @@ Open `alias.sh` and edit the following configuration variables.
  
 ### Git
  - **@gl** : Show logs
- - **@glp** : Show logs pretty
+ - **@glp** : Show logs pretty (need "git lg" alias created, see [Git alias](https://github.com/asubit/git-alias/tree/master) repository
  - **@gb** : Show branches
  - **@gf** : Fetch branches
  - **@gfd** : Fetch and delete old branches
