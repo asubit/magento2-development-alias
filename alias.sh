@@ -6,7 +6,6 @@
 # ------------------
 PROJECT_PATH='/var/www/project'
 PROJECT_NAME='Project' # project folder name in pub/static/frontend 
-LOG_FILE='/var/log/apache2/error.log'
 MAGE_USER='www-data'
 MAGE_GROUP='www-data'
 
@@ -85,14 +84,15 @@ echo -e "${YELLOW}magento cache:flush${NC}"
 # Recompile Magento
 alias @sdc='echo -e "${YELLOW}magento setup:di:compile${NC}"
 magento setup:di:compile
-@cf
-@c7'
+@cf'
 # Upgrade all Magento modules
 alias @su='echo -e "${YELLOW}magento setup:upgrade${NC}"
-magento setup:upgrade'
+magento setup:upgrade
+@cf'
 # Deploy static contents
 alias @sscd='echo -e "${YELLOW}magento setup:static-content:deploy${NC}"
-magento setup:static-content:deploy'
+magento setup:static-content:deploy
+@cf'
 # List all installed langages
 alias @ill='echo -e"${YELLOW}magento info:language:list${NC}"
 magento info:language:list'
