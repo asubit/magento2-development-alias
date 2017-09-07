@@ -203,4 +203,4 @@ echo -e "${LIGHTCYAN}The current directorie is : ${NC}"
 pwd
 echo -e "${LIGHTCYAN}The current Git branch is : ${NC}"
 git branch
-echo "Happy Coding !"
+echo -e "${LIGHTCYAN}Happy Coding !${NC}"
