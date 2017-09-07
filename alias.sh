@@ -117,7 +117,7 @@ alias @gd='echo -e "${YELLOW}git diff${NC}"
 git diff'
 # Display help text
 alias @help='
-echo -e "${LIGHTRED}Magento 2${NC} ${GREEN}Developement Alias Tools${NC}
+echo -e "${LIGHTRED}Magento 2${NC} ${GREEN}Developement Alias Tools - by asubit${NC}
 
 ${YELLOW}Usage:${NC}
  @[alias]
