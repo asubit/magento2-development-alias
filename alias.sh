@@ -6,6 +6,7 @@
 # ------------------
 PROJECT_PATH='/var/www/project'
 PROJECT_NAME='Project' # project folder name in pub/static/frontend 
+LOG_FILE='/var/log/apache2/error.log'
 MAGE_USER='www-data'
 MAGE_GROUP='www-data'
 
